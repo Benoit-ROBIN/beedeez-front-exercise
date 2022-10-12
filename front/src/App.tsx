@@ -5,11 +5,14 @@ import {
 } from 'react-native-safe-area-context';
 
 import {AppNavigator} from './navigators/AppNavigator';
+import {StationsProvider} from './providers/stations';
 
 const App = () => {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <AppNavigator />
+      <StationsProvider>
+        <AppNavigator />
+      </StationsProvider>
     </SafeAreaProvider>
   );
 };

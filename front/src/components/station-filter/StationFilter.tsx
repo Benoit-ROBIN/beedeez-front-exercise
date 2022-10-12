@@ -1,8 +1,11 @@
 import React from 'react';
 import {Formik} from 'formik';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
+import {useStationsLoad} from '../../hooks/stations';
 
 export const StationFilter = () => {
+  const {filterStations} = useStationsLoad();
+
   return (
     <View style={styles.container}>
       <Formik
@@ -10,7 +13,7 @@ export const StationFilter = () => {
           filter: '',
         }}
         onSubmit={({filter}) => {
-          console.log(filter);
+          filterStations(filter);
         }}>
         {({handleChange, handleBlur, handleSubmit, values}) => (
           <>

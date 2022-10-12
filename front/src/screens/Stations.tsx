@@ -27,6 +27,7 @@ export const Stations = () => {
         data={stations.list}
         renderItem={StationItem}
         onEndReached={loadStations}
+        onEndReachedThreshold={0.2}
         keyExtractor={(item, index) => String(index)}
       />
     </View>

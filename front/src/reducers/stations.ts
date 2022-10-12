@@ -1,5 +1,5 @@
 import {AnyAction} from '@reduxjs/toolkit';
-import {STATIONS_SUCCESS} from '../actions/types';
+import {FILTER_STATIONS_SUCCESS, STATIONS_SUCCESS} from '../actions/types';
 
 const initialState = {
   list: [],
@@ -18,6 +18,12 @@ export function stationsReducer(state = initialState, action: AnyAction) {
         list: newList,
         total: payload.total,
         isCompleted: payload.isCompleted,
+      };
+    case FILTER_STATIONS_SUCCESS:
+      return {
+        list: payload.list,
+        isCompleted: payload.isCompleted,
+        total: payload.total,
       };
     default:
       return state;
