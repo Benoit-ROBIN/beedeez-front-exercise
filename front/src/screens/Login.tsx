@@ -1,6 +1,8 @@
 import React from 'react';
 import {Formik} from 'formik';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
+import {navigate} from '../navigators/utils';
+import {SCREENS} from '../navigators/screens';
 
 export const Login = () => {
   return (
@@ -36,7 +38,7 @@ export const Login = () => {
             />
             <Text
               style={styles.link}
-              onPress={() => console.log('do something')}>
+              onPress={() => navigate(SCREENS.REGISTER)}>
               Pas de compte ? Créer un compte
             </Text>
           </View>
