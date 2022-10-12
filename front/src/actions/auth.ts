@@ -13,6 +13,7 @@ export const loginAction =
             user: {
               id: response.data.data.id,
               email: response.data.data.email,
+              password: response.data.data.password,
               createdAt: response.data.data.createdAt,
               updatedAt: response.data.data.updatedAt,
             },
