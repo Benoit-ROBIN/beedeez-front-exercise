@@ -4,6 +4,7 @@ import {StationFilter} from '../components/station-filter/StationFilter';
 import {StationItem} from '../components/station-item/StationItem';
 import {StationsListEmpty} from '../components/stations-list-empty/StationsListEmpty';
 import {useStationsLoad} from '../hooks/stations';
+import {Layout} from '../layout';
 import {useStations} from '../selectors/stations';
 
 export const Stations = () => {
@@ -29,18 +30,20 @@ export const Stations = () => {
   }, [refreshStations]);
 
   return (
-    <View style={styles.container}>
-      <StationFilter />
-      <FlatList
-        style={styles.list}
-        data={stations.list}
-        renderItem={StationItem}
-        onEndReached={loadStations}
-        onEndReachedThreshold={0.2}
-        keyExtractor={(item, index) => String(index)}
-        ListEmptyComponent={StationsListEmpty}
-      />
-    </View>
+    <Layout>
+      <View style={styles.container}>
+        <StationFilter />
+        <FlatList
+          style={styles.list}
+          data={stations.list}
+          renderItem={StationItem}
+          onEndReached={loadStations}
+          onEndReachedThreshold={0.2}
+          keyExtractor={(item, index) => String(index)}
+          ListEmptyComponent={StationsListEmpty}
+        />
+      </View>
+    </Layout>
   );
 };
 

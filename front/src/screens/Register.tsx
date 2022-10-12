@@ -1,44 +1,48 @@
 import React from 'react';
-import {View, TextInput, Text, StyleSheet, Button} from 'react-native';
+import {View, TextInput, Text, StyleSheet} from 'react-native';
 import {Formik} from 'formik';
 import {register} from '../services/auth';
+import {Layout} from '../layout';
+import {Button} from '../components/button';
 
 export const Register = () => {
   return (
-    <View style={styles.container}>
-      <Formik
-        initialValues={{
-          email: '',
-          password: '',
-        }}
-        onSubmit={({email, password}) => {
-          register(email, password);
-        }}>
-        {({handleChange, handleBlur, handleSubmit, values}) => (
-          <View>
-            <Text>Email</Text>
-            <TextInput
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              value={values.email}
-              style={styles.input}
-            />
-            <Text>Password</Text>
-            <TextInput
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
-              value={values.password}
-              style={styles.input}
-              secureTextEntry
-            />
-            <Button
-              onPress={handleSubmit as ({email, password}: any) => void}
-              title="Register"
-            />
-          </View>
-        )}
-      </Formik>
-    </View>
+    <Layout>
+      <View style={styles.container}>
+        <Formik
+          initialValues={{
+            email: '',
+            password: '',
+          }}
+          onSubmit={({email, password}) => {
+            register(email, password);
+          }}>
+          {({handleChange, handleBlur, handleSubmit, values}) => (
+            <View>
+              <Text>Email</Text>
+              <TextInput
+                onChangeText={handleChange('email')}
+                onBlur={handleBlur('email')}
+                value={values.email}
+                style={styles.input}
+              />
+              <Text>Password</Text>
+              <TextInput
+                onChangeText={handleChange('password')}
+                onBlur={handleBlur('password')}
+                value={values.password}
+                style={styles.input}
+                secureTextEntry
+              />
+              <Button
+                onPress={handleSubmit as ({email, password}: any) => void}
+                title="Register"
+              />
+            </View>
+          )}
+        </Formik>
+      </View>
+    </Layout>
   );
 };
 
