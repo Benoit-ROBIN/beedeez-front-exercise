@@ -1,4 +1,8 @@
-import {filterStationsAction, stationsAction} from '../actions/stations';
+import {
+  filterStationsAction,
+  refreshStationsAction,
+  stationsAction,
+} from '../actions/stations';
 import {useStationsContext} from '../providers/stations';
 import {useAppDispatch} from './redux';
 
@@ -18,6 +22,9 @@ export const useStationsLoad = () => {
     filterStations: (newFilter: string) => {
       setFilter(newFilter);
       dispatch(filterStationsAction(itemNb, newFilter));
+    },
+    refreshStations: () => {
+      dispatch(refreshStationsAction(itemNb, filter));
     },
   };
 };

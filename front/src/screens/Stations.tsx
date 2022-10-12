@@ -2,11 +2,12 @@ import React, {useEffect} from 'react';
 import {FlatList, StyleSheet, View} from 'react-native';
 import {StationFilter} from '../components/station-filter/StationFilter';
 import {StationItem} from '../components/station-item/StationItem';
+import {StationsListEmpty} from '../components/stations-list-empty/StationsListEmpty';
 import {useStationsLoad} from '../hooks/stations';
 import {useStations} from '../selectors/stations';
 
 export const Stations = () => {
-  const {itemNb, getStations} = useStationsLoad();
+  const {itemNb, getStations, refreshStations} = useStationsLoad();
   const stations = useStations();
 
   const loadStations = () => {
@@ -19,6 +20,14 @@ export const Stations = () => {
     getStations();
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refreshStations();
+    }, 120000);
+
+    return () => clearInterval(interval);
+  }, [refreshStations]);
+
   return (
     <View style={styles.container}>
       <StationFilter />
@@ -29,6 +38,7 @@ export const Stations = () => {
         onEndReached={loadStations}
         onEndReachedThreshold={0.2}
         keyExtractor={(item, index) => String(index)}
+        ListEmptyComponent={StationsListEmpty}
       />
     </View>
   );
