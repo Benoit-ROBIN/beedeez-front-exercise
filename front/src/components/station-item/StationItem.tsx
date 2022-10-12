@@ -6,13 +6,28 @@ type StationItemProps = {
     stationCode: string;
     name: string;
     numBikesAvailable: string;
+    num_bikes_available_types: [
+      {
+        mechanical: number;
+      },
+      {
+        ebike: number;
+      },
+    ];
   };
 };
 export const StationItem = ({item}: StationItemProps) => {
   return (
     <View style={styles.container}>
       <Text>{item.name}</Text>
-      <Text>{item.numBikesAvailable}</Text>
+      <Text>
+        vélos mécanique disponibles:{' '}
+        {item.num_bikes_available_types[0].mechanical}
+      </Text>
+      <Text>
+        vélos éléctrique disponibles: {item.num_bikes_available_types[1].ebike}
+      </Text>
+      <Text>total vélos disponibles: {item.numBikesAvailable}</Text>
     </View>
   );
 };

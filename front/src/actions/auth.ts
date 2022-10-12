@@ -1,6 +1,7 @@
-import {login} from '../services/auth';
+import {PayloadAction} from '@reduxjs/toolkit';
+import {login, logout} from '../services/auth';
 import {AppDispatch} from '../store';
-import {LOGIN_FAIL, LOGIN_SUCCESS} from './types';
+import {LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT} from './types';
 
 export const loginAction =
   ({email, password}: {email: string; password: string}) =>
@@ -28,5 +29,19 @@ export const loginAction =
         });
         return Promise.reject();
       },
+    );
+  };
+
+export const logoutAction =
+  (user: PayloadAction<{id: string; email: string; password: string}>) =>
+  (dispatch: AppDispatch) => {
+    return logout(user).then(
+      () => {
+        localStorage.removeItem('user');
+        dispatch({
+          type: LOGOUT,
+        });
+      },
+      () => Promise.reject(),
     );
   };
