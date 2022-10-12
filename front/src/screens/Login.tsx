@@ -3,8 +3,11 @@ import {Formik} from 'formik';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import {navigate} from '../navigators/utils';
 import {SCREENS} from '../navigators/screens';
+import {useAppDispatch} from '../hooks/redux';
+import {loginAction} from '../actions/auth';
 
 export const Login = () => {
+  const dispatch = useAppDispatch();
   return (
     <View style={styles.container}>
       <Formik
@@ -13,7 +16,7 @@ export const Login = () => {
           password: '',
         }}
         onSubmit={({email, password}) => {
-          console.log({email, password});
+          dispatch(loginAction({email, password}));
         }}>
         {({handleChange, handleBlur, handleSubmit, values}) => (
           <View>
