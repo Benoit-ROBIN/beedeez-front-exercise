@@ -12,3 +12,10 @@ export const login = (email: string, password: string) => {
     password,
   });
 };
+
+export const register = async (email: string, password: string) => {
+  return axiosInstance.post('signup', {
+    email,
+    password,
+  });
+};

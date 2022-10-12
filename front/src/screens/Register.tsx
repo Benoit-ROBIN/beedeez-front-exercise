@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, TextInput, Text, StyleSheet, Button} from 'react-native';
 import {Formik} from 'formik';
+import {register} from '../services/auth';
 
 export const Register = () => {
   return (
@@ -11,7 +12,7 @@ export const Register = () => {
           password: '',
         }}
         onSubmit={({email, password}) => {
-          console.log(email, password);
+          register(email, password);
         }}>
         {({handleChange, handleBlur, handleSubmit, values}) => (
           <View>
@@ -28,6 +29,7 @@ export const Register = () => {
               onBlur={handleBlur('password')}
               value={values.password}
               style={styles.input}
+              secureTextEntry
             />
             <Button
               onPress={handleSubmit as ({email, password}: any) => void}
