@@ -10,13 +10,15 @@ class StationsController {
     try {
       const {
         stations: finAllStations,
+        isCompleted,
         total,
       }: {
         stations: Station[];
+        isCompleted: boolean;
         total: number;
       } = await this.stationsService.findAllStations(+itemNb);
 
-      res.status(200).json({ data: { list: finAllStations, total }, message: 'findAll' });
+      res.status(200).json({ data: { list: finAllStations, isCompleted, total }, message: 'findAll' });
     } catch (error) {
       next(error);
     }
