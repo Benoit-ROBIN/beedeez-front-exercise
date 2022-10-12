@@ -4,6 +4,7 @@ import {STATIONS_SUCCESS} from '../actions/types';
 const initialState = {
   list: [],
   total: 0,
+  isCompleted: true,
 };
 
 export function stationsReducer(state = initialState, action: AnyAction) {
@@ -16,6 +17,7 @@ export function stationsReducer(state = initialState, action: AnyAction) {
         ...state,
         list: newList,
         total: payload.total,
+        isCompleted: payload.isCompleted,
       };
     default:
       return state;

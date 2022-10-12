@@ -5,19 +5,26 @@ import {useStationsLoad} from '../hooks/stations';
 import {useStations} from '../selectors/stations';
 
 export const Stations = () => {
-  const {getStations} = useStationsLoad();
+  const {itemNb, getStations} = useStationsLoad();
   const stations = useStations();
+
+  const loadStations = () => {
+    if (stations.isCompleted) {
+      getStations(itemNb + 20);
+    }
+  };
 
   useEffect(() => {
     getStations();
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         style={styles.list}
         data={stations.list}
         renderItem={StationItem}
+        onEndReached={loadStations}
         keyExtractor={(item, index) => String(index)}
       />
     </View>
@@ -25,6 +32,9 @@ export const Stations = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   list: {
     flex: 1,
   },
