@@ -6,10 +6,17 @@ class StationsController {
   public stationsService = new stationsService();
 
   public getStations = async (req: Request, res: Response, next: NextFunction) => {
+    const itemNb = req.query?.itemNb;
     try {
-      const finAllStations: Station[] = await this.stationsService.findAllStations();
+      const {
+        stations: finAllStations,
+        total,
+      }: {
+        stations: Station[];
+        total: number;
+      } = await this.stationsService.findAllStations(+itemNb);
 
-      res.status(200).json({ data: finAllStations, message: 'findAll' });
+      res.status(200).json({ data: { list: finAllStations, total }, message: 'findAll' });
     } catch (error) {
       next(error);
     }
