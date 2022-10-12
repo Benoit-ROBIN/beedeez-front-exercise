@@ -7,6 +7,7 @@ class StationsController {
 
   public getStations = async (req: Request, res: Response, next: NextFunction) => {
     const itemNb = req.query?.itemNb;
+    const filter = req.query?.filter;
     try {
       const {
         stations: finAllStations,
@@ -16,7 +17,7 @@ class StationsController {
         stations: Station[];
         isCompleted: boolean;
         total: number;
-      } = await this.stationsService.findAllStations(+itemNb);
+      } = await this.stationsService.findAllStations(+itemNb, filter);
 
       res.status(200).json({ data: { list: finAllStations, isCompleted, total }, message: 'findAll' });
     } catch (error) {
